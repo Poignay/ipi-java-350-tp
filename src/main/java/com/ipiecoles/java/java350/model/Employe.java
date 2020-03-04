@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Entity
@@ -44,8 +45,12 @@ public class Employe {
     }
 
     public Integer getNombreAnneeAnciennete() {
-        //TODO
-        return null;
+        LocalDate now = LocalDate.now();
+        Integer nbInterval=0;
+        if (this.dateEmbauche != null) {
+            nbInterval = (int) ChronoUnit.YEARS.between(this.dateEmbauche, now);
+        }
+        return nbInterval;
     }
 
     public Integer getNbConges() {
